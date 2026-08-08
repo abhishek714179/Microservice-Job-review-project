@@ -1,0 +1,55 @@
+docker ps
+docker rmi
+docker rm
+docker ps -a
+docker images
+./mvnw spring-boot:build-image "-Dspring-boot:image.imageName-abhi4179/appimagename"
+docker pull
+docker --help
+docker push 
+
+docker run -p 8080:8080 abhi4179/jobappimage
+docker run -d name db -e POSTGRES_PASSWORD=mysecretpassword postgres
+docker run -d --name pgadmin -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=abhi dpage/pgadmin4
+
+docker exec -it pgadmin ping db
+docker rm -f db pgadmin
+
+
+USINF NETWORKS:
+
+docker network create my-network
+docker run -d --name db --network my-network -e POSTGRES_PASSWORD=mysecretpassword postgres
+
+docker run -d --name pgadmin --network my-network -e
+PGADMIN_DEFAULT_EMAIL=user@domain.com -e PGADMIN_DEFAULT_PASSWRD=SuperSecret dpage/pgadmin4
+docker exec -it pgadmin pingdb
+
+
+
+
+Start the Postgre SQL service :
+docker run -d \
+	--name l_container \
+	-e POSTGRES_USER=abhi \
+	-e POSTGRE_PASSWORD=abhi \
+	-e PGDATA=/data/postgres \
+	-v postgres:/data/postgres \
+	-p 5432:5432 \
+	--network postgres \
+	-restart unless-stopped m\
+	postgres
+
+
+Start the pgAdmin service:
+docker run -d \
+	--name pgadmin_container \
+	-e PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org \
+	-e PGADMIN_DEFAULT_PASSWORD=admin \
+	-e PGADMIN_CONFIG_SERVER_MODE=False \
+	-v pgadmin:/var/lib/pgadmin \
+	-p 5050:80 \
+	--network postgres \
+	-restart unless-stopped m\
+	dpage/pgadmin4
+
